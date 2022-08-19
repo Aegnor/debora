@@ -29,7 +29,7 @@ module.exports = {
     app: path.resolve(environment.paths.source, 'app.js'),
   },
   output: {
-    filename: 'js/[name].js',
+    filename: '[name][chunkhash].js',
     path: environment.paths.output,
   },
   module: {
@@ -71,7 +71,7 @@ module.exports = {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'styles/[name].css',
+      filename: '[name][chunkhash].css',
     }),
     new CleanWebpackPlugin({
       verbose: true,
