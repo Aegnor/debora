@@ -1,0 +1,42 @@
+@import '../../styles/app.scss';
+
+.player {
+  position: absolute;
+  left: 50%;
+  bottom: 40px;
+  transform: translateX(-50%);
+  color: $white;
+  text-align: center;
+  white-space: nowrap;
+  width: 100%;
+  z-index: 100;
+}
+
+.player__button {
+  border: none;
+  background: none;
+  outline: none;
+  margin: 0 5px;
+  fill: $white;
+}
+
+.player__button__icon {
+  height: 13px;
+  width: 13px;
+  stroke: $white;
+
+  .player__button--toggle &--pause {
+    display: none;
+  }
+
+  .player__button--toggle &--play {
+    display: block;
+  }
+}
+
+.player__information {
+  color: $white;
+  display: block;
+  margin-top: 5px;
+  font-size: 0.9rem;
+}
