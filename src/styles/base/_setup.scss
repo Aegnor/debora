@@ -1,20 +1,20 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 html {
-    font-size: 18px;
-    line-height: 1.6;
-    font-family: $font-family-main;
+  font-size: 18px;
+  line-height: 1.6;
+  font-family: $font-family-main;
 }
 
 body {
-    background-color: $black;
-    color: $white;
+  background-color: $black;
+  color: $white;
 }
 
 button {
-    cursor: pointer;
+  cursor: pointer;
 }
