@@ -6,6 +6,7 @@ files:
     - 'src/styles/base/_reset.scss'
     - 'src/styles/base/_print.scss'
     - 'src/styles/base/_fonts.scss'
+    - 'src/styles/base/normalize.scss'
     - 'src/styles/base/mixins.scss'
     - 'src/styles/dirty/_hacks.scss'
 
