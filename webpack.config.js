@@ -67,6 +67,16 @@ module.exports = {
           filename: 'images/[name].[hash:6][ext]',
         },
       },
+      {
+        test: /\.(glsl|frag|vert)$/,
+        loader: 'raw-loader',
+        exclude: /node_modules/,
+      },
+      {
+        test: /\.(glsl|frag|vert)$/,
+        loader: 'glslify-loader',
+        exclude: /node_modules/,
+      },
     ],
   },
   plugins: [
@@ -80,8 +90,8 @@ module.exports = {
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: path.resolve(environment.paths.source, 'assets', '**/*'),
-          to: path.resolve(environment.paths.output, 'assets', '**/*'),
+          from: path.resolve(environment.paths.source, 'assets'),
+          to: path.resolve(environment.paths.output, 'assets'),
           toType: 'dir',
           noErrorOnMissing: true,
           globOptions: {
