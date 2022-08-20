@@ -40,3 +40,9 @@
   margin-top: 5px;
   font-size: 0.9rem;
 }
+
+@media screen and (max-width: 768px) {
+  .player {
+    bottom: 20px;
+  }
+}
