@@ -32,6 +32,12 @@ module.exports = {
     filename: '[name][chunkhash].js',
     path: environment.paths.output,
   },
+  resolve: {
+    // Shortcut to fast input in import
+    alias: {
+      '@shaders': path.resolve(environment.paths.source, 'shaders'),
+    },
+  },
   module: {
     rules: [
       {
