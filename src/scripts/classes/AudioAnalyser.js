@@ -1,15 +1,17 @@
 import { noop } from 'lodash';
 import songs from '../../data/songs';
 
-export default class AudioManager {
+class AudioAnalyser {
   constructor() {
+    // eslint-disable-next-line no-undef
     this.audio = new Audio();
     this.audio.crossOrigin = 'anonymous';
     this.audio.volume = 1;
+    this.audio.playbackRate = 3;
 
-    this.audio.addEventListener('ended', this.next);
+    this.audio.addEventListener('ended', this.next.bind(this));
 
-    this.frequency = new Uint8Array(100);
+    this.frequency = new Uint8Array(512);
 
     this.song = {
       current: Math.floor(Math.random() * songs.length),
@@ -88,3 +90,6 @@ export default class AudioManager {
     }
   }
 }
+
+const Analyser = new AudioAnalyser();
+export default Analyser;

@@ -15,7 +15,6 @@ export default class AudioPlayer {
       iconPlay: this.element.querySelector('.js-player-play'),
       title: this.element.querySelector('.js-player-title'),
     };
-    this.audioAnalyser = new AudioAnalyser();
 
     this.nextCallback = this.next.bind(this);
     this.previousCallback = this.previous.bind(this);
@@ -34,15 +33,18 @@ export default class AudioPlayer {
   }
 
   next () {
-    this.audioAnalyser.next();
+    AudioAnalyser.next();
+    return this;
   }
 
   previous () {
-    this.audioAnalyser.previous();
+    AudioAnalyser.previous();
+    return this;
   }
 
   toggle () {
-    this.audioAnalyser.toggle();
+    AudioAnalyser.toggle();
+    return this;
   }
 
   addEventListeners () {
@@ -50,9 +52,9 @@ export default class AudioPlayer {
     this.elements.buttonPrevious.addEventListener('click', this.previousCallback);
     this.elements.buttonToggle.addEventListener('click', this.toggleCallback);
 
-    this.audioAnalyser.audio.addEventListener('canplay', this.onLoadCallback);
-    this.audioAnalyser.audio.addEventListener('pause', this.onPauseCallback);
-    this.audioAnalyser.audio.addEventListener('playing', this.onPlayingCallback);
+    AudioAnalyser.audio.addEventListener('canplay', this.onLoadCallback);
+    AudioAnalyser.audio.addEventListener('pause', this.onPauseCallback);
+    AudioAnalyser.audio.addEventListener('playing', this.onPlayingCallback);
   }
 
   removeEventListeners () {
@@ -62,7 +64,7 @@ export default class AudioPlayer {
   }
 
   onLoad () {
-    this.elements.title.innerHTML = this.audioAnalyser.information.name;
+    this.elements.title.innerHTML = AudioAnalyser.information.name;
   }
 
   onPause () {

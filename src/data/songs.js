@@ -4,12 +4,12 @@ export default [
     link: '../assets/music/1.mp3',
   },
   {
-    name: 'still feel - half•alive',
-    link: '../assets/music/2.mp3',
+    name: 'a-ha - take on me',
+    link: '../assets/music/take-on-me.mp3',
   },
   {
     name: 'dvno - justice',
-    link: '../assets/music/3.mp3',
+    link: '../assets/music/dvno-justice.mp3',
   },
   {
     name: 'never ever - strfkr',

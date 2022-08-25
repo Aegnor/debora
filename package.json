@@ -67,6 +67,7 @@
   "target": "web",
   "dependencies": {
     "gsap": "^3.11.0",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "three": "^0.143.0"
   }
 }
