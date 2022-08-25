@@ -7,7 +7,6 @@ class AudioAnalyser {
     this.audio = new Audio();
     this.audio.crossOrigin = 'anonymous';
     this.audio.volume = 1;
-    this.audio.playbackRate = 3;
 
     this.audio.addEventListener('ended', this.next.bind(this));
 

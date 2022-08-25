@@ -2,7 +2,7 @@
 import './style.scss';
 
 // Audio Analyser
-import AudioAnalyser from '../../scripts/classes/AudioAnalyser';
+import AudioAnalyser from '@scripts/classes/AudioAnalyser';
 
 export default class AudioPlayer {
   constructor(element) {

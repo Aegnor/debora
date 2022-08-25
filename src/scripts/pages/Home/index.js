@@ -11,8 +11,8 @@ import AudioFragmentShader from '@shaders/home-frag.glsl';
 import AudioVertexShader from '@shaders/home-vert.glsl';
 
 // Classes
-import AudioAnalyser from '../../classes/AudioAnalyser';
-import ThreeManager from '../../classes/ThreeManager';
+import AudioAnalyser from '@scripts/classes/AudioAnalyser';
+import ThreeManager from '@scripts/classes/ThreeManager';
 
 export default class Home {
   constructor() {

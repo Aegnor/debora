@@ -36,6 +36,7 @@ module.exports = {
     // Shortcut to fast input in import
     alias: {
       '@shaders': path.resolve(environment.paths.source, 'shaders'),
+      '@scripts': path.resolve(environment.paths.source, 'scripts'),
     },
   },
   module: {
