@@ -5,13 +5,13 @@ import './styles/app.scss';
 import { debounce } from 'lodash';
 
 // Classes
-import ThreeManager from './scripts/classes/ThreeManager';
+import ThreeManager from '@scripts/classes/ThreeManager';
 
 // Components
-import AudioPlayer from './components/AudioPlayer';
+import AudioPlayer from '@components/AudioPlayer';
 
 // Pages
-import Home from './scripts/pages/Home';
+import Home from '@scripts/pages/Home';
 
 class App {
   constructor() {
