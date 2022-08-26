@@ -38,6 +38,7 @@ class ThreeManager {
   createRenderer() {
     this.renderer = new WebGLRenderer();
     this.renderer.setSize(this.width, this.height);
+    this.renderer.setPixelRatio(window.devicePixelRatio);
 
     this.renderer.domElement.setAttribute('id', 'three-scene');
     document.body.appendChild(this.renderer.domElement);

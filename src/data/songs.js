@@ -1,7 +1,7 @@
 export default [
   {
-    name: 'drinkee - sofi tukker',
-    link: 'assets/music/1.mp3',
+    name: 'coldplay - hymn for the weekend',
+    link: 'assets/music/coldplay-hymnfortheweekend.mp3',
   },
   {
     name: 'a-ha - take on me',

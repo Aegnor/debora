@@ -19,7 +19,7 @@ export default class Home {
     this.height = 128;
     this.width = 128;
     this.widthSegments = 26;
-    this.heightSegments = 4;
+    this.heightSegments = 2;
 
     this.uniforms = {
       u_time: {
@@ -67,10 +67,5 @@ export default class Home {
   update(time) {
     this.uniforms.u_time.value = time;
     this.uniforms.u_data_arr.value = AudioAnalyser.getFrequency();
-
-    const speed = -0.001;
-    this.plane.rotation.z += speed;
-    this.plane.rotation.x += speed;
-    this.plane.rotation.y += speed;
   }
 }
