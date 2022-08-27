@@ -5,13 +5,14 @@ import './styles/app.scss';
 import { debounce } from 'lodash';
 
 // Classes
-import ThreeManager from '@scripts/classes/ThreeManager';
+import MainScene from '@scripts/classes/MainScene';
 
 // Components
 import AudioPlayer from '@components/AudioPlayer';
 
 // Pages
 import Home from '@scripts/pages/Home';
+import Background from '@scripts/classes/Background';
 
 class App {
   constructor() {
@@ -20,6 +21,7 @@ class App {
 
     this.createAudioPlayer();
     this.createHome();
+    this.createBackground();
 
     this.render();
     this.addEventListeners();
@@ -34,15 +36,21 @@ class App {
     this.home = new Home();
   }
 
+  createBackground() {
+    this.background = new Background();
+  }
+
   // eslint-disable-next-line class-methods-use-this
   onResize() {
-    ThreeManager.onResize();
+    MainScene.onResize();
+    this.background.onResize();
   }
 
   render() {
     this.home.update();
+    this.background.update();
 
-    ThreeManager.update();
+    MainScene.update();
 
     window.requestAnimationFrame(this.render.bind(this));
   }

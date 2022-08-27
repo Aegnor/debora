@@ -19,5 +19,8 @@
 /* Typography */
 @import 'base/typography';
 
+/* For entire site */
+@import 'base/global';
+
 /* Browser specific styles */
 @import 'dirty/hacks';

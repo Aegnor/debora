@@ -5,6 +5,7 @@ import {
   Mesh,
   DoubleSide,
 } from 'three';
+import gsap from 'gsap';
 
 // Shaders
 import AudioFragmentShader from '@shaders/home-frag.glsl';
@@ -12,20 +13,16 @@ import AudioVertexShader from '@shaders/home-vert.glsl';
 
 // Classes
 import AudioAnalyser from '@scripts/classes/AudioAnalyser';
-import ThreeManager from '@scripts/classes/ThreeManager';
+import MainScene from '@scripts/classes/MainScene';
 
 export default class Home {
   constructor() {
     this.height = 128;
     this.width = 128;
     this.widthSegments = 26;
-    this.heightSegments = 2;
+    this.heightSegments = 3;
 
     this.uniforms = {
-      u_time: {
-        type: 'f',
-        value: 4.2,
-      },
       u_amplitude: {
         type: '',
         value: 10.0,
@@ -36,36 +33,32 @@ export default class Home {
       },
     };
 
-    this.createGeometry();
-    this.createMaterial();
-    this.createElement();
-  }
-
-  createGeometry() {
     this.geometry = new PlaneGeometry(this.width, this.width, this.widthSegments, this.heightSegments);
-  }
-
-  createMaterial() {
     this.material = new ShaderMaterial({
       uniforms: this.uniforms,
       vertexShader: AudioVertexShader,
       fragmentShader: AudioFragmentShader,
       wireframe: true,
+      opacity: 0,
       side: DoubleSide,
     });
-  }
-
-  createElement() {
     this.plane = new Mesh(this.geometry, this.material);
 
     this.plane.rotation.x = -Math.PI / 2 + Math.PI / 4;
     this.plane.position.y = 12;
 
-    ThreeManager.scene.add(this.plane);
+    MainScene.scene.add(this.plane);
+
+    gsap.from(this.plane.scale, {
+      x: 0,
+      y: 0,
+      z: 0,
+      ease: 'back',
+      duration: 1.4,
+    });
   }
 
-  update(time) {
-    this.uniforms.u_time.value = time;
+  update() {
     this.uniforms.u_data_arr.value = AudioAnalyser.getFrequency();
   }
 }

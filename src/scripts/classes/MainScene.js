@@ -7,7 +7,7 @@ import {
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import Stats from 'three/examples/jsm/libs/stats.module';
 
-class ThreeManager {
+class MainScene {
   constructor() {
     this.height = window.innerHeight;
     this.width = window.innerWidth;
@@ -39,8 +39,9 @@ class ThreeManager {
     this.renderer = new WebGLRenderer();
     this.renderer.setSize(this.width, this.height);
     this.renderer.setPixelRatio(window.devicePixelRatio);
+    this.renderer.setClearColor(0x000000, 0);
 
-    this.renderer.domElement.setAttribute('id', 'three-scene');
+    this.renderer.domElement.setAttribute('id', 'main-scene');
     document.body.appendChild(this.renderer.domElement);
 
     return this;
@@ -88,5 +89,5 @@ class ThreeManager {
   }
 }
 
-const ThreeManagerSetup = new ThreeManager();
-export default ThreeManagerSetup;
+const MainSceneInit = new MainScene();
+export default MainSceneInit;

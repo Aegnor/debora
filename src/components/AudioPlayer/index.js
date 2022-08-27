@@ -1,6 +1,9 @@
 // Styles
 import './style.scss';
 
+// Libs
+import gsap from 'gsap';
+
 // Audio Analyser
 import AudioAnalyser from '@scripts/classes/AudioAnalyser';
 
@@ -22,10 +25,16 @@ export default class AudioPlayer {
     this.onLoadCallback = this.onLoad.bind(this);
     this.onPauseCallback = this.onPause.bind(this);
     this.onPlayingCallback = this.onPlaying.bind(this);
+
+    this.show();
   }
 
   show () {
-    console.log(this, 'show');
+    gsap.to(this.element, {
+      opacity: 1,
+      ease: 'back',
+      duration: 1.4,
+    });
   }
 
   hide () {
