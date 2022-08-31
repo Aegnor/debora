@@ -1,0 +1,25 @@
+.container-fluid {
+  margin: 0 60px;
+  max-width: 1920px;
+}
+
+.flex {
+  display: flex;
+}
+
+.ai-center {
+  align-items: center;
+}
+
+@media screen and (max-width: 768px) {
+  .container-fluid {
+    margin: 0 40px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .container-fluid {
+    margin: 0 15px;
+  }
+}
+

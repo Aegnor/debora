@@ -22,5 +22,8 @@
 /* For entire site */
 @import 'base/global';
 
+/* Layout */
+@import 'layouts/layout';
+
 /* Browser specific styles */
 @import 'dirty/hacks';

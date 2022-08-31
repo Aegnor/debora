@@ -119,7 +119,7 @@ export default class Background {
   }
 
   update() {
-    this.time += 0.05;
+    this.time += 0.03;
     this.material.uniforms.time.value = this.time;
     this.material.uniforms.startColor.value = this.startColor;
 

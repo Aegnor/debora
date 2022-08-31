@@ -37,6 +37,7 @@ module.exports = {
     alias: {
       '@shaders': path.resolve(environment.paths.source, 'shaders'),
       '@scripts': path.resolve(environment.paths.source, 'scripts'),
+      '@styles': path.resolve(environment.paths.source, 'styles'),
       '@components': path.resolve(environment.paths.source, 'components'),
     },
   },

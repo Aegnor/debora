@@ -13,7 +13,7 @@ import AudioVertexShader from '@shaders/home-vert.glsl';
 
 // Classes
 import AudioAnalyser from '@scripts/classes/AudioAnalyser';
-import MainScene from '@scripts/classes/MainScene';
+// import MainScene from '@scripts/classes/MainScene';
 
 export default class Home {
   constructor() {
@@ -45,9 +45,9 @@ export default class Home {
     this.plane = new Mesh(this.geometry, this.material);
 
     this.plane.rotation.x = -Math.PI / 2 + Math.PI / 4;
-    this.plane.position.y = 12;
+    this.plane.position.y = 14;
 
-    MainScene.scene.add(this.plane);
+    // MainScene.scene.add(this.plane);
 
     gsap.from(this.plane.scale, {
       x: 0,

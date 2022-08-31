@@ -49,7 +49,8 @@ class MainScene {
 
   createStats() {
     this.stats = Stats();
-    document.body.appendChild(this.stats.dom);
+    // document.body.appendChild(this.stats.dom);
+    // this.stats.dom.style.transform = 'translateY(1000%)';
 
     return this;
   }

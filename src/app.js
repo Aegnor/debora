@@ -9,6 +9,7 @@ import MainScene from '@scripts/classes/MainScene';
 
 // Components
 import AudioPlayer from '@components/AudioPlayer';
+import Header from '@components/Header';
 
 // Pages
 import Home from '@scripts/pages/Home';
@@ -16,31 +17,36 @@ import Background from '@scripts/classes/Background';
 
 class App {
   constructor() {
+    this.$body = document.documentElement;
+
     this.height = window.innerHeight;
     this.width = window.innerWidth;
 
     this.createAudioPlayer();
-    this.createHome();
-    this.createBackground();
+    this.createHeader();
+    this.home = new Home();
+
+    this.background = new Background();
 
     this.render();
     this.addEventListeners();
   }
 
   createAudioPlayer() {
-    this.audioPlayer = new AudioPlayer('.js-player');
-    this.audioPlayer.init();
+    this.$audioPlayerSelector = this.$body.querySelector('.js-player');
+    if (this.$audioPlayerSelector) {
+      this.audioPlayer = new AudioPlayer(this.$audioPlayerSelector);
+      this.audioPlayer.init();
+    }
   }
 
-  createHome() {
-    this.home = new Home();
+  createHeader() {
+    this.$headerSelector = this.$body.querySelector('.page-header');
+    if (this.$headerSelector) {
+      this.header = new Header(this.$headerSelector);
+    }
   }
 
-  createBackground() {
-    this.background = new Background();
-  }
-
-  // eslint-disable-next-line class-methods-use-this
   onResize() {
     MainScene.onResize();
     this.background.onResize();

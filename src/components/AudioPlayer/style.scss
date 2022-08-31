@@ -1,4 +1,4 @@
-@import '../../styles/app.scss';
+@import '@styles/app.scss';
 
 .player {
   position: absolute;
@@ -39,7 +39,6 @@
   color: $white;
   display: block;
   margin-top: 5px;
-  font-size: 0.9rem;
 }
 
 @media screen and (max-width: 768px) {

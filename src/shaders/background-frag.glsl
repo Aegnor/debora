@@ -55,7 +55,7 @@ void main() {
 
   vec2 baseUV = rotate2d(noise) * vPosition.xy * 0.1;
 
-  float basePattern = lines(baseUV, 0.5);
+  float basePattern = lines(baseUV, 0.4);
   float secondPattern = lines(baseUV, 0.2);
 
   vec3 baseColor = mix(changingColor, colorPrimary, basePattern);
