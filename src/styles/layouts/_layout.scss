@@ -3,6 +3,12 @@
   max-width: 1920px;
 }
 
+.container {
+  margin: 0 auto;
+  padding: 0 60px;
+  max-width: 1520px;
+}
+
 .flex {
   display: flex;
 }
@@ -15,11 +21,19 @@
   .container-fluid {
     margin: 0 40px;
   }
+
+  .container {
+    padding: 0 40px;
+  }
 }
 
 @media screen and (max-width: 480px) {
   .container-fluid {
     margin: 0 15px;
+  }
+
+  .container {
+    padding: 0 15px;
   }
 }
 

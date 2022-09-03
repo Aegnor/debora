@@ -13,7 +13,7 @@ export default class Header {
 
   addEventListeners() {
     this.elements.hamburgerMenu.addEventListener('click', () => {
-      this.elements.hamburgerMenu.classList.toggle('is--opened');
+      this.elements.hamburgerMenu.classList.toggle('is-opened');
     });
   }
 }

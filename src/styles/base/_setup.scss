@@ -16,6 +16,10 @@ body {
   height: 100%;
   background-color: $black;
   color: $white;
+
+  &.is-touchevents {
+    position: static;
+  }
 }
 
 button {

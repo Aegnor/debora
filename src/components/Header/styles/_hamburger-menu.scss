@@ -1,0 +1,95 @@
+// Hamburger Menu
+.hamburger {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  flex-direction: column;
+  margin-left: 20px;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+
+  &.is-opened {
+    &:hover .hamburger,
+    .hamburger {
+      &__top {
+        transform: scaleX(1) rotate(45deg) translate(13px, 20px);
+      }
+
+      &__middle {
+        transform: scaleX(0);
+      }
+
+      &__bottom {
+        transform: scaleX(1) rotate(-45deg) translate(13px, -19px);
+      }
+    }
+  }
+
+  &__line {
+    width: 100%;
+    height: 2px;
+    background-color: $white;
+    transition: transform .2s cubic-bezier(.785, .135, .15, .86);;
+  }
+
+  &__top {
+    transform-origin: right center;
+    transform: scaleX(.80);
+  }
+
+  &__middle {
+    margin-top: 7px;
+    margin-bottom: 7px;
+    transform-origin: center center;
+  }
+
+  &__bottom {
+    transform-origin: right center;
+    transform: scaleX(.65);
+  }
+}
+
+@media screen and (min-width: 1025px) {
+  .hamburger {
+    &:hover {
+      .hamburger {
+        &__top {
+          transform: scaleX(1);
+        }
+
+        &__middle {
+          transform: scaleX(.6);
+        }
+
+        &__bottom {
+          transform: scaleX(1);
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .hamburger {
+    width: 30px;
+    height: 30px;
+
+    &__middle {
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+
+    &.is--opened {
+      .hamburger {
+        &__top {
+          transform: scaleX(1) rotate(45deg) translate(9px, 16px);
+        }
+
+        &__bottom {
+          transform: scaleX(1) rotate(-45deg) translate(9px, -16px);
+        }
+      }
+    }
+  }
+}

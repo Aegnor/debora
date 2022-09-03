@@ -1,3 +1,7 @@
 /**
  * Helper mixins
 */
+
+@mixin fluid-typography($min-font-size, $scaler: 1rem + 1vw, $max-font-size) {
+  font-size: clamp($min-font-size, $scaler, $max-font-size);
+}

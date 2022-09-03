@@ -1,3 +1,6 @@
+// Styles
+import './style.scss';
+
 // Libs
 import {
   ShaderMaterial,
