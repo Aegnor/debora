@@ -1,0 +1,59 @@
+button {
+  cursor: pointer;
+  background: none;
+  border: 0;
+  outline: none;
+  color: inherit;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  color: inherit;
+}
+
+@keyframes scroll-down-bounce {
+  0% {
+    transform: translateY(-10%);
+  }
+
+  50% {
+    transform: translateY(10%);
+  }
+
+  100% {
+    transform: translateY(-10%);
+  }
+}
+
+.button-scroll-down {
+  position: fixed;
+  bottom: 40px;
+  right: 60px;
+
+  &__title {
+    margin-right: 15px;
+  }
+
+  &__animation {
+    animation: 2s infinite scroll-down-bounce $standart-timing;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .button-scroll-down {
+    bottom: 30px;
+    right: 40px;
+
+    &__title {
+      margin-right: 10px;
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .button-scroll-down {
+    bottom: 15px;
+    right: 15px;
+  }
+}

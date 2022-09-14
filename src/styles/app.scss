@@ -25,5 +25,9 @@
 /* Layout */
 @import 'layouts/layout';
 
+/* Components */
+@import 'components/buttons';
+@import 'components/scrollbar';
+
 /* Browser specific styles */
 @import 'dirty/hacks';

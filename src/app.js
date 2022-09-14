@@ -8,15 +8,13 @@ import Scrollbar from 'smooth-scrollbar';
 import { debounce } from 'lodash';
 
 // Classes
-import MainScene from '@scripts/classes/MainScene';
 import Detection from '@scripts/classes/Detection';
+import Background from '@scripts/classes/Background';
 
 // Components
-import AudioPlayer from '@components/AudioPlayer';
 import Header from '@components/Header';
 
 // Pages
-import Background from '@scripts/classes/Background';
 import Home from './pages/Home';
 
 class App {
@@ -26,29 +24,19 @@ class App {
     this.height = window.innerHeight;
     this.width = window.innerWidth;
 
-    this.createAudioPlayer();
     this.createHeader();
+    this.createSmoothScroll();
+    this.background = new Background();
     this.home = new Home();
 
-    this.background = new Background();
     if (Detection.isTouch === true) {
       this.$body.classList.add('is-touchevents');
-    }
-    if (Detection.isTouch === false) {
-      this.scrollbarOptions = {};
-      Scrollbar.init(document.querySelector('.js-smooth-scroll'), this.scrollbarOptions);
+    } else {
+      this.$body.classList.add('is-desktop');
     }
 
     this.render();
     this.addEventListeners();
-  }
-
-  createAudioPlayer() {
-    this.$audioPlayerSelector = this.$body.querySelector('.js-player');
-    if (this.$audioPlayerSelector) {
-      this.audioPlayer = new AudioPlayer(this.$audioPlayerSelector);
-      this.audioPlayer.init();
-    }
   }
 
   createHeader() {
@@ -58,16 +46,19 @@ class App {
     }
   }
 
+  createSmoothScroll() {
+    if (Detection.isTouch === false) {
+      this.scrollbarOptions = {};
+      Scrollbar.init(document.querySelector('.js-smooth-scroll'), this.scrollbarOptions);
+    }
+  }
+
   onResize() {
-    MainScene.onResize();
     this.background.onResize();
   }
 
   render() {
-    this.home.update();
     this.background.update();
-
-    MainScene.update();
 
     window.requestAnimationFrame(this.render.bind(this));
   }

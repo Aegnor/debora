@@ -10,7 +10,61 @@
     margin: auto;
   }
 
+  &__text {
+    position: relative;
+  }
+
+  &__image {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+    pointer-events: none;
+    width: 380px;
+  }
+
   &__button {
+    @include fluid-typography(1rem, 1.4rem, #{"1rem + 1vw"});
     margin-top: 60px;
+
+    &-icon {
+      margin-right: 10px;
+    }
+  }
+}
+
+.is-desktop {
+  .intro {
+    &__button {
+      span {
+        transition: transform .2s ease-in-out;
+      }
+
+      &:hover {
+        span {
+          transform: translateX(10px);
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .intro {
+    &__button {
+      margin-top: 40px;
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .intro {
+    &__button {
+      margin-top: 25px;
+
+      &-icon {
+        width: 24px;
+        height: 24px;
+      }
+    }
   }
 }

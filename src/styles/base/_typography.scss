@@ -18,7 +18,7 @@ h3,
 
 h4,
 .h4 {
-  @include fluid-typography(1.2rem, #{"1rem + 2vw"}, 2.3rem);
+  @include fluid-typography(1.2rem, 2.3rem);
   line-height: 1.5;
 }
 
