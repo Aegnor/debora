@@ -1,17 +1,8 @@
-#background-scene {
+#gl-scene {
   position: fixed;
   top: 0;
   left: 0;
   z-index: -2;
-  width: 100vw;
-  height: 100vh;
-}
-
-#main-scene {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: -1;
   width: 100vw;
   height: 100vh;
 }
