@@ -11,6 +11,9 @@ import {
 import BackgroundFragmentShader from '@shaders/background-frag.glsl';
 import BackgroundVertexShader from '@shaders/background-vert.glsl';
 
+// Classes
+import WebGLManager from './WebGLManager';
+
 export default class Background {
   constructor() {
     this.time = 0;
@@ -42,15 +45,17 @@ export default class Background {
       vertexShader: BackgroundVertexShader,
       fragmentShader: BackgroundFragmentShader,
     });
-    this.geometry = new SphereBufferGeometry(4.5, 100, 100);
+    this.geometry = new SphereBufferGeometry(4.5, 10, 10);
 
     this.mesh = new Mesh(this.geometry, this.material);
-    this.mesh.position.z = -10;
+    this.mesh.position.set(0, 0, 0);
     this.mesh.scale.set(3.5, 3.5, 3.5);
+
+    WebGLManager.scene.add(this.mesh);
   }
 
   update() {
-    this.time += 0.03;
+    this.time += 0.035;
     this.material.uniforms.time.value = this.time;
     this.material.uniforms.startColor.value = this.startColor;
   }

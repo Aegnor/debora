@@ -5,7 +5,19 @@ import './style.scss';
 import FloatingImage from '@components/FloatingImage';
 
 export default class Home {
-  constructor() {
-    this.floatingImage = new FloatingImage('.js-floating-image');
+  constructor({ viewport }) {
+    this.floatingImage = new FloatingImage({
+      selector: '.js-floating-image',
+      targetImage: '.js-floating-image-target',
+      viewport,
+    });
+  }
+
+  update() {
+    this.floatingImage.update();
+  }
+
+  onResize({viewport}) {
+    this.floatingImage.onResize({ viewport });
   }
 }
