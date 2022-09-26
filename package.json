@@ -68,6 +68,8 @@
   },
   "target": "web",
   "dependencies": {
+    "glsl-noise": "^0.0.0",
+    "glslify": "^7.1.1",
     "gsap": "^3.11.0",
     "lodash": "^4.17.21",
     "smooth-scrollbar": "^8.7.5",

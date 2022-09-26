@@ -14,6 +14,7 @@ import WebGLManager from '@scripts/classes/WebGLManager';
 
 // Components
 import Header from '@components/Header';
+import Preloader from '@components/Preloader';
 
 // Pages
 import Home from './pages/Home';
@@ -21,18 +22,6 @@ import Home from './pages/Home';
 class App {
   constructor() {
     this.$body = document.body;
-
-    this.height = window.innerHeight;
-    this.width = window.innerWidth;
-
-    const fov = WebGLManager.camera.fov * (Math.PI / 180);
-    const height = 2 * Math.tan(fov / 2) * WebGLManager.camera.position.z;
-    const width = height * WebGLManager.camera.aspect;
-
-    this.viewport = {
-      height,
-      width,
-    };
 
     this.createHeader();
     this.createSmoothScroll();
@@ -63,18 +52,9 @@ class App {
     }
   }
 
-  // eslint-disable-next-line class-methods-use-this
   onResize() {
     WebGLManager.onResize();
-    const fov = WebGLManager.camera.fov * (Math.PI / 180);
-    const height = 2 * Math.tan(fov / 2) * WebGLManager.camera.position.z;
-    const width = height * WebGLManager.camera.aspect;
-
-    this.viewport = {
-      height,
-      width,
-    };
-    this.home.onResize({ viewport: this.viewport });
+    this.home.onResize();
   }
 
   render() {
@@ -90,5 +70,9 @@ class App {
   }
 }
 
-// eslint-disable-next-line no-unused-vars
-const app = new App();
+window.addEventListener('DOMContentLoaded', () => {
+  // eslint-disable-next-line no-unused-vars
+  const app = new App();
+  const preloader = document.querySelector('.preloader');
+  preloader.style.display = 'none';
+});

@@ -11,32 +11,36 @@ import {
   Vector2,
   Clock,
 } from 'three';
+import glsl from 'glslify';
 
 // Classes
 import WebGLManager from '@scripts/classes/WebGLManager';
+import GlObject from '@scripts/classes/GlObject';
 
 // Shaders
 import ImageFragmentShader from './shaders/fragment.glsl';
 import ImageVertexShader from './shaders/vertex.glsl';
 
-export default class FloatingImage {
-  constructor({ selector, targetImage, viewport }) {
-    this.$element = typeof selector === 'string' ? document.querySelector(selector) : selector;
-    this.$floatingImage = this.$element.querySelector(targetImage);
+export default class FloatingImage extends GlObject {
+  constructor({ selector, targetImage }) {
+    const $element = typeof selector === 'string' ? document.querySelector(selector) : selector;
+    const $floatingImage = $element.querySelector(targetImage);
+    super($floatingImage);
+
+    this.$element = $element;
+    this.$floatingImage = $floatingImage;
 
     this.targetX = 0;
     this.targetY = 0;
 
-    this.floatingImageSize = {
-      width: this.$floatingImage.clientWidth,
-      height: this.$floatingImage.clientHeight,
-    };
+    this.xLastAmplitude = 0;
+    this.yLastAmplitude = 0;
 
     this.screen = {
       width: window.innerWidth,
       height: window.innerHeight,
     };
-    this.viewport = viewport;
+    this.viewport = this.calculateViewport();
 
     this.onMouseEnterCallback = this.onMouseEnter.bind(this);
     this.onMouseMoveCallback = this.onMouseMove.bind(this);
@@ -49,11 +53,11 @@ export default class FloatingImage {
 
     this.createMesh();
 
-    this.updateScale();
     this.material.uniforms.uPlaneSizes.value = [this.mesh.scale.x, this.mesh.scale.y];
   }
 
   createMesh() {
+    // eslint-disable-next-line no-undef
     const image = new Image();
     image.src = this.$floatingImage.src;
 
@@ -74,6 +78,9 @@ export default class FloatingImage {
         uTime: {
           value: 0.0,
         },
+        uProgress: {
+          value: 0.0,
+        },
         uImageSizes: {
           value: new Vector2(0, 0),
         },
@@ -87,24 +94,31 @@ export default class FloatingImage {
           value: new Vector2(0, 0),
         },
       },
-      vertexShader: ImageVertexShader,
-      fragmentShader: ImageFragmentShader,
+      vertexShader: glsl(ImageVertexShader),
+      fragmentShader: glsl(ImageFragmentShader),
       transparent: true,
     });
     this.mesh = new Mesh(this.geometry, this.material);
+    this.scaleSize = this.calculateScaleSize();
+    this.mesh.scale.set(this.scaleSize.x, this.scaleSize.y, 1);
 
     WebGLManager.scene.add(this.mesh);
   }
 
   onMouseEnter() {
     gsap.to(this.material.uniforms.uAlpha, {
-      duration: 0.4,
       value: 1,
       ease: 'power3.out',
     });
   }
 
   onMouseMove(event) {
+    gsap.to(this.material.uniforms.uProgress, {
+      value: 1,
+      duration: 5,
+      ease: 'power3.out',
+    });
+
     const viewportWidthHalf = this.viewport.width / 2;
     const viewportHeightHalf = this.viewport.height / 2;
 
@@ -121,13 +135,13 @@ export default class FloatingImage {
 
   onMouseLeave() {
     gsap.to(this.material.uniforms.uAlpha, {
-      duration: 0.5,
       value: 0,
       ease: 'power3.out',
     });
   }
 
-  onResize({ viewport }) {
+  onResize() {
+    if (!this.visible) return;
     gsap.to(this.mesh.position, {
       x: 0,
       y: 0,
@@ -136,18 +150,11 @@ export default class FloatingImage {
 
     this.screen.width = window.innerWidth;
     this.screen.height = window.innerHeight;
+    this.viewport = this.calculateViewport();
 
-    if (viewport) {
-      this.viewport = viewport;
-    }
-
-    this.updateScale();
+    this.scaleSize = this.calculateScaleSize();
+    this.mesh.scale.set(this.scaleSize.x, this.scaleSize.y, 1);
     this.material.uniforms.uPlaneSizes.value = [this.mesh.scale.x, this.mesh.scale.y];
-  }
-
-  updateScale() {
-    this.mesh.scale.x = (this.viewport.width * this.floatingImageSize.width) / this.screen.width;
-    this.mesh.scale.y = (this.viewport.height * this.floatingImageSize.height) / this.screen.height;
   }
 
   addEventListeners() {
@@ -163,10 +170,29 @@ export default class FloatingImage {
   }
 
   update() {
-    // const amplitude = 0.0005;
-    // const xAmplitude = (this.targetX - this.offset.x) * amplitude;
-    // const yAmplitude = -(this.targetY - this.offset.y) * amplitude;
-    // this.material.uniforms.uOffset.value.set(xAmplitude, yAmplitude);
-    this.material.uniforms.uTime.value = this.clock.getElapsedTime();
+    const amplitudeMultiplier = 1.6;
+    const xAmplitude = (this.targetX - this.offset.x) * amplitudeMultiplier;
+    const yAmplitude = -(this.targetY - this.offset.y) * amplitudeMultiplier;
+    gsap.to(this.material.uniforms.uOffset.value, {
+      x: xAmplitude,
+      y: yAmplitude,
+      duration: 5,
+      ease: 'power3.out',
+    });
+
+    this.mesh.material.uniforms.uTime.value = this.clock.getElapsedTime();
+
+    // Mouse stopped moving
+    this.xLastAmplitude = xAmplitude;
+    this.yLastAmplitude = yAmplitude;
+    const isMouseXDirectionStopMoving = this.xLastAmplitude === xAmplitude;
+    const isMouseYDirectionStopMoving = this.yLastAmplitude === yAmplitude;
+    if (isMouseXDirectionStopMoving && isMouseYDirectionStopMoving) {
+      gsap.to(this.material.uniforms.uProgress, {
+        value: 0,
+        duration: 5,
+        ease: 'power3.out',
+      });
+    }
   }
 }
