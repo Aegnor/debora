@@ -52,8 +52,6 @@ export default class FloatingImage extends GlObject {
     this.offset = new Vector2(0, 0);
 
     this.createMesh();
-
-    this.material.uniforms.uPlaneSizes.value = [this.mesh.scale.x, this.mesh.scale.y];
   }
 
   createMesh() {
@@ -62,7 +60,6 @@ export default class FloatingImage extends GlObject {
     image.src = this.$floatingImage.src;
 
     image.onload = () => {
-      this.material.uniforms.uImageSizes.value = [image.naturalWidth, image.naturalHeight];
       this.material.uniforms.uTexture.value = this.loader.load(image.src);
     };
 
@@ -80,15 +77,6 @@ export default class FloatingImage extends GlObject {
         },
         uProgress: {
           value: 0.0,
-        },
-        uImageSizes: {
-          value: new Vector2(0, 0),
-        },
-        uPlaneSizes: {
-          value: new Vector2(0, 0),
-        },
-        uViewportSizes: {
-          value: new Vector2(this.viewport.width, this.viewport.height),
         },
         uOffset: {
           value: new Vector2(0, 0),
@@ -154,7 +142,6 @@ export default class FloatingImage extends GlObject {
 
     this.scaleSize = this.calculateScaleSize();
     this.mesh.scale.set(this.scaleSize.x, this.scaleSize.y, 1);
-    this.material.uniforms.uPlaneSizes.value = [this.mesh.scale.x, this.mesh.scale.y];
   }
 
   addEventListeners() {

@@ -2,8 +2,6 @@ precision mediump float;
 uniform sampler2D uTexture;
 uniform float uAlpha;
 uniform float uTime;
-uniform vec2 uImageSizes;
-uniform vec2 uPlaneSizes;
 
 varying vec2 vUv;
 varying vec3 vPos;

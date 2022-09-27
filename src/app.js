@@ -3,6 +3,7 @@ import './styles/app.scss';
 
 // Libs
 import Scrollbar from 'smooth-scrollbar';
+import imagesLoaded from 'imagesloaded';
 
 // Utilities
 import { debounce } from 'lodash';
@@ -14,7 +15,6 @@ import WebGLManager from '@scripts/classes/WebGLManager';
 
 // Components
 import Header from '@components/Header';
-import Preloader from '@components/Preloader';
 
 // Pages
 import Home from './pages/Home';
@@ -70,9 +70,21 @@ class App {
   }
 }
 
+const preloadImages = new Promise((resolve) => {
+  imagesLoaded(
+    document.querySelectorAll('img'),
+    {
+      background: true,
+    },
+    resolve,
+  );
+});
+
 window.addEventListener('DOMContentLoaded', () => {
-  // eslint-disable-next-line no-unused-vars
-  const app = new App();
   const preloader = document.querySelector('.preloader');
-  preloader.style.display = 'none';
+  preloadImages.then(() => {
+    preloader.style.display = 'none';
+    // eslint-disable-next-line no-unused-vars
+    const app = new App();
+  });
 });
