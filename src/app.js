@@ -2,8 +2,13 @@
 import './styles/app.scss';
 
 // Libs
-import Scrollbar from 'smooth-scrollbar';
 import imagesLoaded from 'imagesloaded';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { MathUtils } from 'three';
+
+// Plugins
+import ScrollSmoother from '@scripts/plugins/ScrollSmoother';
 
 // Utilities
 import { debounce } from 'lodash';
@@ -23,9 +28,11 @@ class App {
   constructor() {
     this.$body = document.body;
 
-    this.createHeader();
+    gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+
     this.createSmoothScroll();
-    this.background = new Background();
+    this.createHeader();
+    this.createBackground();
     this.home = new Home({ viewport: this.viewport });
 
     if (Detection.isTouch === true) {
@@ -45,10 +52,27 @@ class App {
     }
   }
 
+  createBackground() {
+    this.background = new Background();
+
+    gsap.to(this.background, {
+      scrollTrigger: {
+        start: 'top top',
+        end: 'bottom bottom',
+        onUpdate: ({ progress }) => {
+          this.background.startColor = MathUtils.lerp(0, 0.3, progress);
+        },
+      },
+    });
+  }
+
   createSmoothScroll() {
     if (Detection.isTouch === false) {
-      this.scrollbarOptions = {};
-      Scrollbar.init(document.querySelector('.js-smooth-scroll'), this.scrollbarOptions);
+      this.scrollSmoother = ScrollSmoother.create({
+        content: '.js-smooth-scroll',
+        smooth: 1.5,
+        effects: true,
+      });
     }
   }
 

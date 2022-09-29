@@ -36,9 +36,9 @@
 
     <!-- Main Content -->
     <main class="js-smooth-scroll smooth-scroll">
-      <div class="container">
-        <!-- Intro -->
-        <div class="intro">
+      <!-- Intro -->
+      <div class="intro">
+        <div class="container flex">
           <div class="intro__wrapper">
             <div class="intro__text js-floating-image">
               <img class="intro__image js-floating-image-target" data-texture="assets/images/home-about-portrait.jpg" src="assets/images/home-about-portrait.jpg" alt="Debora portrait">
@@ -51,17 +51,26 @@
               <span>Get in touch</span>
             </a>
           </div>
-          <button class="button-scroll-down button" aria-label="Scroll Down">
-            <span class="button-scroll-down__title">Scroll down</span>
-            <svg class="button-scroll-down__animation" width="24" height="24" viewBox="0 0 49 49" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M24.6327 44.2268L10.6327 30.2268L12.7327 28.1268L23.1327 38.5268V4.22684H26.1327V38.5268L36.5327 28.1268L38.6327 30.2268L24.6327 44.2268Z" fill="white"/>
-            </svg>
-          </button>
         </div>
-        <!-- Intro End -->
+        <button id="button" class="button-scroll-down button" aria-label="Scroll Down">
+          <span class="button-scroll-down__title">Scroll down</span>
+          <svg class="button-scroll-down__animation" width="24" height="24" viewBox="0 0 49 49" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M24.6327 44.2268L10.6327 30.2268L12.7327 28.1268L23.1327 38.5268V4.22684H26.1327V38.5268L36.5327 28.1268L38.6327 30.2268L24.6327 44.2268Z" fill="white"/>
+          </svg>
+        </button>
       </div>
+      <!-- Intro End -->
+
+      <!-- Projects List -->
+      <div class="container">
+        <div class="projects">
+          <div class="project">
+            <img src="assets/images/1.jpg" alt="image">
+          </div>
+        </div>
+      </div>
+      <!-- Projects List End -->
     </main>
     <!-- Main Content End -->
-
   </body>
 </html>

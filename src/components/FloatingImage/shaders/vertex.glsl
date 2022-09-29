@@ -9,10 +9,9 @@ uniform float uProgress;
 
 void main() {
   vUv = uv;
-
   vec3 pos = position;
   vPos = pos;
-  float noiseFreq = 7.;
+  float noiseFreq = 6.5;
   float noiseAmp = .30;
   float deformationX = pos.x * noiseFreq + uOffset.x;
   float deformationY = sin(pos.y + uOffset.y) * 2.5;
