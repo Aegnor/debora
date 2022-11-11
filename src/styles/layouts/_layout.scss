@@ -3,6 +3,12 @@
   max-width: 1920px;
 }
 
+.container-md {
+  margin: 0 auto;
+  padding: 0 60px;
+  max-width: 1640px;
+}
+
 .container {
   margin: 0 auto;
   padding: 0 60px;
@@ -22,6 +28,7 @@
     margin: 0 40px;
   }
 
+  .container-md,
   .container {
     padding: 0 40px;
   }
@@ -32,6 +39,7 @@
     margin: 0 15px;
   }
 
+  .container-md,
   .container {
     padding: 0 15px;
   }

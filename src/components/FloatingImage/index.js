@@ -15,13 +15,13 @@ import glsl from 'glslify';
 
 // Classes
 import WebGLManager from '@scripts/classes/WebGLManager';
-import GlObject from '@scripts/classes/GlObject';
+import GlImage from '@scripts/classes/GlImage';
 
 // Shaders
 import ImageFragmentShader from './shaders/fragment.glsl';
 import ImageVertexShader from './shaders/vertex.glsl';
 
-export default class FloatingImage extends GlObject {
+export default class FloatingImage extends GlImage {
   constructor({ selector, targetImage }) {
     const $element = typeof selector === 'string' ? document.querySelector(selector) : selector;
     const $floatingImage = $element.querySelector(targetImage);
@@ -40,18 +40,20 @@ export default class FloatingImage extends GlObject {
       width: window.innerWidth,
       height: window.innerHeight,
     };
-    this.viewport = this.calculateViewport();
 
-    this.onMouseEnterCallback = this.onMouseEnter.bind(this);
-    this.onMouseMoveCallback = this.onMouseMove.bind(this);
-    this.onMouseLeaveCallback = this.onMouseLeave.bind(this);
-
+    this.bindAll();
     this.addEventListeners();
     this.clock = new Clock();
     this.loader = new TextureLoader();
     this.offset = new Vector2(0, 0);
 
     this.createMesh();
+  }
+
+  bindAll() {
+    ['onMouseEnter', 'onMouseMove', 'onMouseLeave'].forEach((fn) => {
+      this[fn] = this[fn].bind(this);
+    });
   }
 
   createMesh() {
@@ -87,8 +89,7 @@ export default class FloatingImage extends GlObject {
       transparent: true,
     });
     this.mesh = new Mesh(this.geometry, this.material);
-    this.scaleSize = this.calculateScaleSize();
-    this.mesh.scale.set(this.scaleSize.x, this.scaleSize.y, 1);
+    this.initMesh();
 
     WebGLManager.scene.add(this.mesh);
   }
@@ -130,6 +131,7 @@ export default class FloatingImage extends GlObject {
 
   onResize() {
     if (!this.visible) return;
+    super.resize();
     gsap.to(this.mesh.position, {
       x: 0,
       y: 0,
@@ -138,22 +140,18 @@ export default class FloatingImage extends GlObject {
 
     this.screen.width = window.innerWidth;
     this.screen.height = window.innerHeight;
-    this.viewport = this.calculateViewport();
-
-    this.scaleSize = this.calculateScaleSize();
-    this.mesh.scale.set(this.scaleSize.x, this.scaleSize.y, 1);
   }
 
   addEventListeners() {
-    this.$element.addEventListener('mouseenter', this.onMouseEnterCallback);
-    this.$element.addEventListener('mousemove', this.onMouseMoveCallback);
-    this.$element.addEventListener('mouseleave', this.onMouseLeaveCallback);
+    this.$element.addEventListener('mouseenter', this.onMouseEnter);
+    this.$element.addEventListener('mousemove', this.onMouseMove);
+    this.$element.addEventListener('mouseleave', this.onMouseLeave);
   }
 
   removeEventListeners() {
-    this.$element.removeEventListener('mouseenter', this.onMouseEnterCallback);
-    this.$element.removeEventListener('mousemove', this.onMouseMoveCallback);
-    this.$element.removeEventListener('mouseleave', this.onMouseLeaveCallback);
+    this.$element.removeEventListener('mouseenter', this.onMouseEnter);
+    this.$element.removeEventListener('mousemove', this.onMouseMove);
+    this.$element.removeEventListener('mouseleave', this.onMouseLeave);
   }
 
   update() {

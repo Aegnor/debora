@@ -1,10 +1,12 @@
 @import '@styles/app.scss';
+@import './styles/projects';
 
 .intro {
   position: relative;
   display: flex;
+  align-items: center;
+  min-height: 100vh;
   width: 100%;
-  height: 100vh;
 
   &__wrapper {
     padding: 100px 0;
@@ -27,7 +29,7 @@
   }
 
   &__button {
-    @include fluid-typography(1rem, 1.4rem, #{"1rem + 1vw"});
+    @include fluid-typography(0.7rem, 1.4rem, #{"1rem + 1vw"});
     margin-top: 60px;
 
     &-icon {
@@ -62,6 +64,10 @@
 
 @media screen and (max-width: 480px) {
   .intro {
+    &__wrapper {
+      padding: 60px 0 40px 0;
+    }
+
     &__button {
       margin-top: 25px;
 

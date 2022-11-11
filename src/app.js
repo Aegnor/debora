@@ -7,9 +7,6 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { MathUtils } from 'three';
 
-// Plugins
-import ScrollSmoother from '@scripts/plugins/ScrollSmoother';
-
 // Utilities
 import { debounce } from 'lodash';
 
@@ -17,6 +14,7 @@ import { debounce } from 'lodash';
 import Detection from '@scripts/classes/Detection';
 import Background from '@scripts/classes/Background';
 import WebGLManager from '@scripts/classes/WebGLManager';
+import Scroll from '@scripts/classes/Scroll';
 
 // Components
 import Header from '@components/Header';
@@ -28,7 +26,7 @@ class App {
   constructor() {
     this.$body = document.body;
 
-    gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+    gsap.registerPlugin(ScrollTrigger);
 
     this.createSmoothScroll();
     this.createHeader();
@@ -66,13 +64,10 @@ class App {
     });
   }
 
+  // eslint-disable-next-line class-methods-use-this
   createSmoothScroll() {
     if (Detection.isTouch === false) {
-      this.scrollSmoother = ScrollSmoother.create({
-        content: '.js-smooth-scroll',
-        smooth: 1.5,
-        effects: true,
-      });
+      Scroll.init();
     }
   }
 

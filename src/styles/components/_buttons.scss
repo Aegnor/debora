@@ -1,3 +1,5 @@
+$scrolldown-button-height: 25px;
+
 button {
   cursor: pointer;
   background: none;
@@ -27,8 +29,10 @@ button {
 }
 
 .button-scroll-down {
+  $margin-bottom: 40px;
+
   position: absolute;
-  bottom: 40px;
+  top: calc(100vh - $scrolldown-button-height - $margin-bottom);
   right: 60px;
 
   &__title {
@@ -42,7 +46,9 @@ button {
 
 @media screen and (max-width: 768px) {
   .button-scroll-down {
-    bottom: 30px;
+    $margin-bottom: 30px;
+
+    top: calc(100vh - $scrolldown-button-height - $margin-bottom);
     right: 40px;
 
     &__title {
@@ -53,7 +59,9 @@ button {
 
 @media screen and (max-width: 480px) {
   .button-scroll-down {
-    bottom: 15px;
+    $margin-bottom: 15px;
+
+    top: calc(100vh - $scrolldown-button-height - $margin-bottom);
     right: 15px;
   }
 }

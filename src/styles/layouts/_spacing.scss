@@ -1,0 +1,27 @@
+.mt-large {
+  margin-top: 120px;
+}
+
+.mb-large {
+  margin-bottom: 120px;
+}
+
+@media screen and (max-width: 768px) {
+  .mt-large {
+    margin-top: 80px;
+  }
+
+  .mb-large {
+    margin-bottom: 80px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .mt-large {
+    margin-top: 40px;
+  }
+
+  .mb-large {
+    margin-bottom: 40px;
+  }
+}
