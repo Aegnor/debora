@@ -3,11 +3,6 @@
  * https://greensock.com
  *
  * @license Copyright 2022, GreenSock. All rights reserved.
- * *** DO NOT DEPLOY THIS FILE ***
- * This is a trial version that only works locally and on domains like codepen.io and codesandbox.io.
- * Loading it on an unauthorized domain violates the license and will cause a redirect.
- * Get the unrestricted file by joining Club GreenSock at https://greensock.com/club
- * @author: Jack Doyle, jack@greensock.com
  */
 
 !(function (e, t) {

@@ -46,10 +46,11 @@ export default class Home {
 
     if (Scroll.scrollSmoother) {
       this.scrollTop = Scroll.scrollSmoother.scrollTop();
+      this.scrollVelocity = Scroll.scrollSmoother.getVelocity();
     }
 
     this.flyImages.forEach((image) => {
-      image.update(0, this.scrollTop);
+      image.update(0, this.scrollTop, this.scrollVelocity);
     });
   }
 

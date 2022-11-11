@@ -7,10 +7,12 @@ import {
   Clock,
 } from 'three';
 import glsl from 'glslify';
+import gsap from 'gsap';
 
 // Classes
 import WebGLManager from '@scripts/classes/WebGLManager';
 import GlImage from '@scripts/classes/GlImage';
+import Scroll from '@scripts/classes/Scroll';
 
 // Shaders
 import ImageFragmentShader from './shaders/fragment.glsl';
@@ -45,7 +47,7 @@ export default class FlyImage extends GlImage {
         uAlpha: {
           value: 1.0,
         },
-        uTime: {
+        uVelocity: {
           value: 0.0,
         },
         uProgress: {
@@ -61,9 +63,20 @@ export default class FlyImage extends GlImage {
     WebGLManager.scene.add(this.mesh);
   }
 
-  update(x, y) {
+  update(x, y, velocity) {
     if (this.visible) {
-      this.mesh.material.uniforms.uTime.value = this.clock.getElapsedTime();
+      if (Scroll.isScrolling) {
+        gsap.to(this.mesh.material.uniforms.uProgress, {
+          value: 1,
+          duration: 3,
+        });
+      } else {
+        gsap.to(this.mesh.material.uniforms.uProgress, {
+          value: 0,
+          duration: 3,
+        });
+      }
+      this.mesh.material.uniforms.uVelocity.value = velocity / 500;
 
       this.posX = this.calculatePositionX(x);
       this.posY = this.calculatePositionY(y);

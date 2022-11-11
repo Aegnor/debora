@@ -4,9 +4,15 @@ import { gsap } from 'gsap';
 // Plugins
 import ScrollSmoother from '@scripts/plugins/ScrollSmoother';
 
+// Utilities
+import { debounce } from 'lodash';
+
 class Scroll {
   constructor() {
     gsap.registerPlugin(ScrollSmoother);
+
+    this.isScrolling = false;
+    window.addEventListener('scroll', this.onScroll.bind(this));
   }
 
   init() {
@@ -15,6 +21,13 @@ class Scroll {
       smooth: 1.5,
       effects: true,
     });
+  }
+
+  onScroll() {
+    this.isScrolling = true;
+    debounce(() => {
+      this.isScrolling = false;
+    }, 300)();
   }
 }
 
