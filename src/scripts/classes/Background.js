@@ -35,7 +35,7 @@ export default class Background {
         },
         colorPrimary: {
           type: 'v3',
-          value: new Vector3(0.1, 0.1, 0.1),
+          value: new Vector3(0.15, 0.15, 0.15),
         },
         colorSecondary: {
           type: 'v3',

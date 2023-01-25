@@ -18,6 +18,7 @@ import Scroll from '@scripts/classes/Scroll';
 
 // Components
 import Header from '@components/Header';
+import AnchorScroll from '@components/AnchorScroll';
 
 // Pages
 import Home from './pages/Home';
@@ -41,6 +42,8 @@ class App {
 
     this.render();
     this.addEventListeners();
+
+    this.initCommonComponents();
   }
 
   createHeader() {
@@ -86,6 +89,10 @@ class App {
 
   addEventListeners () {
     window.addEventListener('resize', debounce(this.onResize.bind(this), 150));
+  }
+
+  initCommonComponents() {
+    this.anchorScroll = new AnchorScroll();
   }
 }
 
