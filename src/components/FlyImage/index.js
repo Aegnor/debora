@@ -4,7 +4,7 @@ import {
   TextureLoader,
   ShaderMaterial,
   PlaneGeometry,
-  Clock,
+  // Clock,
 } from 'three';
 import glsl from 'glslify';
 import gsap from 'gsap';
@@ -24,7 +24,7 @@ export default class FlyImage extends GlImage {
     super($element);
 
     this.$element = $element;
-    this.clock = new Clock();
+    // this.clock = new Clock();
     this.loader = new TextureLoader();
     this.createMesh();
   }

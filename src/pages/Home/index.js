@@ -3,10 +3,10 @@ import './style.scss';
 
 // Components
 import FloatingImage from '@components/FloatingImage';
-import FlyImage from '@components/FlyImage';
+// import FlyImage from '@components/FlyImage';
 
 // Classes
-import Scroll from '@scripts/classes/Scroll';
+// import Scroll from '@scripts/classes/Scroll';
 
 export default class Home {
   constructor() {
@@ -32,42 +32,42 @@ export default class Home {
       });
     });
 
-    this.flyImages = [];
-    this.images = document.querySelectorAll('.projects__image');
-    this.images.forEach((image) => {
-      // eslint-disable-next-line no-param-reassign
-      image.parentElement.style = `--height: ${image.clientHeight}px`;
-      this.flyImages.push(new FlyImage({ selector: image }));
-    });
+    // this.flyImages = [];
+    // this.images = document.querySelectorAll('.js-project-image');
+    // this.images.forEach((image) => {
+    //   // eslint-disable-next-line no-param-reassign
+    //   image.parentElement.style = `--height: ${image.clientHeight}px`;
+    //   this.flyImages.push(new FlyImage({ selector: image }));
+    // });
   }
 
   update() {
     this.floatingImage.update();
 
-    if (Scroll.scrollSmoother) {
-      this.scrollTop = Scroll.scrollSmoother.scrollTop();
-      this.scrollVelocity = Scroll.scrollSmoother.getVelocity();
-    }
+    // if (Scroll.scrollSmoother) {
+    //   this.scrollTop = Scroll.scrollSmoother.scrollTop();
+    //   this.scrollVelocity = Scroll.scrollSmoother.getVelocity();
+    // }
 
-    this.flyImages.forEach((image) => {
-      image.update(0, this.scrollTop, this.scrollVelocity);
-    });
+    // this.flyImages.forEach((image) => {
+    //   image.update(0, this.scrollTop, this.scrollVelocity);
+    // });
   }
 
   onResize() {
     this.floatingImage.onResize();
 
-    if (Scroll.scrollSmoother) {
-      this.scrollTop = Scroll.scrollSmoother.scrollTop();
-    }
+    // if (Scroll.scrollSmoother) {
+    //   this.scrollTop = Scroll.scrollSmoother.scrollTop();
+    // }
 
-    this.images.forEach((image) => {
-      // eslint-disable-next-line no-param-reassign
-      image.parentElement.style = `--height: ${image.clientHeight}px`;
-    });
+    // this.images.forEach((image) => {
+    //   // eslint-disable-next-line no-param-reassign
+    //   image.parentElement.style = `--height: ${image.clientHeight}px`;
+    // });
 
-    this.flyImages.forEach((image) => {
-      image.onResize(0, this.scrollTop);
-    });
+    // this.flyImages.forEach((image) => {
+    //   image.onResize(0, this.scrollTop);
+    // });
   }
 }
